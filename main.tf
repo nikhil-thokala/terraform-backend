@@ -2,6 +2,25 @@ provider "aws" {
     region = "us-east-1"
 }
 
+provider "vault" {
+  address          = "54.89.167.92:8200"
+  skip_child_token = true
+
+  auth_login {
+    path           = "auth/approle/login"
+
+    parameters = {
+      role_id      = "c5a166a3-f0bf-5081-20b4-525093e57ca1"
+      secret_id    = "4b94fc9a-b033-8ec4-3897-d763788ca8c4"
+    }
+  }
+
+}
+
+#data"" "name"{}
+  
+
+
 resource "aws_instance" "example" {
     ami             = "ami-0866a3c8686eaeeba"
     instance_type   = "t2.micro"
