@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 provider "vault" {
-  address          = "54.89.167.92:8200"
+  address          = "http://54.89.167.92:8200"
   skip_child_token = true
 
   auth_login {
@@ -17,8 +17,10 @@ provider "vault" {
 
 }
 
-#data"" "name"{}
-  
+data "vault_kv_secret_v2" "example" {
+  mount = "kv" 
+  name  = "test" 
+}
 
 
 resource "aws_instance" "example" {
@@ -28,7 +30,7 @@ resource "aws_instance" "example" {
     key_name        = "DevOps" 
 
 tags = {
-    Name = "backend-init"
+    secret = data.vault_kv_secret_v2.example.data["username"]
   }
 }
 
