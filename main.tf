@@ -9,7 +9,7 @@ resource "aws_instance" "example" {
     key_name        = "DevOps" 
 
 tags = {
-    Name = "backend-init"
+    Name = "backend-ini"
   }
 }
 
