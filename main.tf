@@ -30,7 +30,6 @@ resource "aws_instance" "example" {
     key_name        = "DevOps" 
 
 tags = {
-    Name = "backend-init-valutinit"
     secret = data.vault_kv_secret_v2.example.data["username"]
   }
 }
